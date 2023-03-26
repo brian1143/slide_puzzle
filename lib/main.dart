@@ -5,9 +5,11 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:very_good_slide_puzzle/app/app.dart';
 import 'package:very_good_slide_puzzle/bootstrap.dart';
 
 void main() {
+  MobileAds.instance.initialize();
   bootstrap(() => const App());
 }
