@@ -11,8 +11,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:http/http.dart' as http;
+import 'package:very_good_slide_puzzle/admob/widget/banner_ad_widget.dart';
 import 'package:very_good_slide_puzzle/helpers/helpers.dart';
 import 'package:very_good_slide_puzzle/l10n/l10n.dart';
 import 'package:very_good_slide_puzzle/puzzle/puzzle.dart';
@@ -53,32 +53,6 @@ class _AppState extends State<App> {
 
   late final PlatformHelper _platformHelper;
   late final Timer _timer;
-
-  /// Google AdMob
-  BannerAd? _bannerAd;
-  bool _isAdLoaded = false;
-
-  final adUnitId = 'ca-app-pub-3940256099942544/6300978111';
-
-  void loadAd() {
-    _bannerAd = BannerAd(
-      adUnitId: adUnitId,
-      request: const AdRequest(),
-      size: AdSize.banner,
-      listener: BannerAdListener(
-        onAdLoaded: (ad) {
-          debugPrint('$ad loaded');
-          setState(() {
-            _isAdLoaded = true;
-          });
-        },
-        onAdFailedToLoad: (ad, err) {
-          debugPrint('BannerAd failed to load: $err');
-          ad.dispose();
-        },
-      ),
-    )..load();
-  }
 
   @override
   void initState() {
@@ -209,7 +183,14 @@ class _AppState extends State<App> {
         GlobalMaterialLocalizations.delegate,
       ],
       supportedLocales: AppLocalizations.supportedLocales,
-      home: const PuzzlePage(),
+      home: Column(
+        children: const [
+          Expanded(
+            child: PuzzlePage(),
+          ),
+          BannerAdWidget(),
+        ],
+      ),
     );
   }
 }
