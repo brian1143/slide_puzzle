@@ -16,7 +16,7 @@ class _BannerAdWidgetState extends State<BannerAdWidget> {
   BannerAd? _bannerAd;
   bool _isAdLoaded = false;
 
-  final adUnitId = 'ca-app-pub-3940256099942544/6300978111';
+  final adUnitId = 'ca-app-pub-3015757477649942/4839973494';
 
   void loadAd() {
     _bannerAd = BannerAd(
